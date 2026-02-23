@@ -1,23 +1,19 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Home from './pages/Home';
-import EventsList from './pages/EventsList';
-import EventDetail from './pages/EventDetail';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { EventProvider } from "./contexts/EventContext"; // We'll create this
+import Header from "./components/Header";
+import EventsList from "./pages/EventsList";
+import EventDetails from "./pages/EventDetails";
 
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
-      <div className="app">
+    <EventProvider>
+      <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/events" element={<EventsList />} />
-          <Route path="/events/:id" element={<EventDetail />} />
+          <Route path="/" element={<EventsList />} />
+          <Route path="/events/:id" element={<EventDetails />} />
         </Routes>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </EventProvider>
   );
-}
-
-export default App;
+};
